@@ -3,14 +3,14 @@
     "allOf": [
       {
         "source": "action",
-        "like": "Microsoft.Storage/storageAccounts"
+        "equals": "Microsoft.Storage/storageAccounts"
       },
       {
         "not": {
           "allof": [
             {
               "field": "Microsoft.Storage/storageAccounts/accountType",
-              "in": ["LRS_Standard", "GRS_Standard", "ZRS_Standard"]
+              "in": ["Standard_LRS", "Standard_GRS"]
             }
           ]
         }
