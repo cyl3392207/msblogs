@@ -4,7 +4,7 @@ I have been talking with customers on IT Policies for their Azure resources rece
 
 Let’s take a typical example. In an enterprise, enabling self-service for different type of users is a key mission. IT admins from the infrastructure team are owners of the subscriptions, and IT guys from other different departments are contributors. While allowing flexibliity of self-service, IT admins also want to have tighter control over what can be done and what can not. 
 
-##Scenario 1 : Enforce tag on your resources
+##Scenario 1 : Enforce Tag on Your Resources
 
 For track internal costing, IT admin are using Tags to organize their resources ( one way to do it is documented here). Also, IT admin can use Tags for other purposes, e.g an external management service requires specific tags to work properly. In order to make sure Tags appears in their resources, very often, it is a manual process or an automated process done periodically to add tags according to certain rules. Even with automation, there is no confidence that required tags are neatly attached to every resource. In short, this requires lots of work and attention and can sometimes go wrong. Therefore, a desire to enforce tags on Azure resources is appreciated. The new feature of Resource Policy in Azure Resource Manager has been designed to tackle this scenario. And here is how.
 To rephrase the requirement, the general policy is that every Azure Resource must be associated with a tag that contains department key and with a valid value. Similar to the documentation here, I can have a policy looks like below:
@@ -64,7 +64,7 @@ From the standpoint of authoring, you would always want to define your policy th
 
 
 
-## Scenario 2: Use Policy to enforce tighter control
+## Scenario 2: Use Policy to Enforce Tighter Access Control
 Well, having tag enforced is great. Another thing usually unbearable is allowing creation of arbitrary resources. One way to do it is through RBAC. You can create a role with the permission to the service whitelist. This is the “VM admin”, “Website Admin” you generally see and the right way to deal with this problem. Then what if you have the following scenarios:
 -	Resources of particular SKU are not allowed
 -	for a particular resource group with my production workloads no reboot allowed
