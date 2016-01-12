@@ -79,7 +79,7 @@ For scenario #1, there is no way you can do it today. RBAC is not a choice since
                   "allof": [
                     {
                       "field": "Microsoft.Storage/storageAccounts/accountType",
-                      "in": ["LRS_Standard", "GRS_Standard", "ZRS_Standard"]
+                      "in": ["Standard_LRS", "Standard_GRS"]
                     }
                   ]
                 }
