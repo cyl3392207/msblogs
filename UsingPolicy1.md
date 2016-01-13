@@ -29,7 +29,7 @@ To rephrase the requirement, the general policy is that every Azure Resource mus
           }
         }
 
-There could be a few variations to this statement, such as the policy for just for VM resources. With the recent support of nested conditions, you can add a resource type condition. Then your policy would look like below. 
+There could be a few variations to this statement, such as the policy for just for VM resources. With the recent support of nested conditions, you can add a resource type condition. Then your policy would look like  [below](https://github.com/cyl3392207/msblogs/blob/master/policyexamples/vm-tag-policy.json) .
 
         {
           "if": {
@@ -69,8 +69,8 @@ Well, having tag enforced is great. Another thing usually unbearable is allowing
 -	Resources of particular SKU are not allowed
 -	for a particular resource group with my production workloads no reboot allowed
 
-For the first case, there is no way you can do it today. RBAC is not a choice since it only looks at actions. However, ARM is adding support in policy languages to properties in the property bag, so that you can block creation of resources of specific kinds. Initially, only a small subset of properties are supported. 
-
+For the first case, there is no way you can do it today. RBAC is not a choice since it only looks at actions. However, ARM is adding support in policy languages to properties in the property bag, so that you can block creation of resources of specific kinds. Initially, only a small subset of properties are supported. The below example is [here as well] (https://github.com/cyl3392207/msblogs/blob/master/policyexamples/storage-account-type-policy.json) 
+ 
 
         {
           "if": {
@@ -95,9 +95,10 @@ For the first case, there is no way you can do it today. RBAC is not a choice si
             "effect": "deny"
           }
         }
-######One tip from my own experience wrt authoring, is to start with a few good pattern. For example, the above template is great for a policy which has a white-list. If I need to add tag for example, I can simply add a tag condition aside from the account type condition.
+        
+One tip from my own experience wrt authoring, is to start with a few good pattern. For example, the above template is great for a policy which has a white-list. If I need to add tag for example, I can simply add a tag condition aside from the account type condition.
     
-For the second case, of course, you can create a special role of ProductionWebAdmin. However, a nicer way is to still use WebAdmin but create a Policy to deny restart operations on VMs. Remember, RBAC gives you permission and Policy denies. I’ll let you do an exercise of comparing the pros and cons. (This is again not supported yet, since Policy today only evaluate PUT requests, but it should be added in near future). The policy definition will look like below:
+For the second case, of course, you can create a special role of ProductionWebAdmin. However, a nicer way is to still use WebAdmin but create a Policy to deny restart operations on VMs. Remember, RBAC gives you permission and Policy denies. I’ll let you do an exercise of comparing the pros and cons. (This is  not supported yet, since Policy today only evaluate PUT requests, but it should be added in near future). The policy definition will look like [below](https://github.com/cyl3392207/msblogs/blob/master/policyexamples/no-start-vm-policy.json). Hopefully, it will be supported in near future. 
 
         {
           "if": {
