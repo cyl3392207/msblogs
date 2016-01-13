@@ -77,7 +77,7 @@ For the first case, there is no way you can do it today. RBAC is not a choice si
             "allOf": [
               {
                 "source": "action",
-                "like": "Microsoft.Storage/storageAccounts"
+                "like": "Microsoft.Storage/storageAccounts/*"
               },
               {
                 "not": {
