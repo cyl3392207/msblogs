@@ -1,0 +1,27 @@
+{
+  "if": {
+    "allOf": [
+      {
+        "not": {
+          "allof": [
+            {
+              "field": "tags",
+              "containsKey": "department"
+            },
+            {
+              "field": "tags.department",
+              "in": [ "department1", "department2", "department3" ]
+            }
+          ]
+        }
+      },
+      {
+        "source": "action",
+        "like": "Microsoft.Compute/*"
+      }
+    ]
+  },
+  "then": {
+    "effect": "deny"
+  }
+}
