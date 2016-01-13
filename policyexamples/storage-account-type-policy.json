@@ -3,7 +3,7 @@
     "allOf": [
       {
         "source": "action",
-        "equals": "Microsoft.Storage/storageAccounts"
+        "like": "Microsoft.Storage/storageAccounts/*"
       },
       {
         "not": {
