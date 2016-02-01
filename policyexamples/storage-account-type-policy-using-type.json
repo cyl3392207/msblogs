@@ -1,0 +1,23 @@
+{
+  "if": {
+    "allOf": [
+      {
+        "field": "type",
+        "equals": "storageAccounts"
+      },
+      {
+        "not": {
+          "allof": [
+            {
+              "field": "Microsoft.Storage/storageAccounts/accountType",
+              "in": ["Standard_LRS", "Standard_GRS"]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "then": {
+    "effect": "deny"
+  }
+}
