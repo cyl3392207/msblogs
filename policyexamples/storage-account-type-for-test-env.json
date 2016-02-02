@@ -1,0 +1,27 @@
+{
+  "if": {
+    "allOf": [
+      {
+        "source": "action",
+        "like": "Microsoft.Storage/storageAccounts/*"
+      },
+      {
+        "field": "tags.env",
+        "equals": "DEV"
+      },
+      {
+        "not": {
+          "allof": [
+            {
+              "field": "Microsoft.Storage/storageAccounts/accountType",
+              "in": [ "Standard_LRS", "Standard_GRS" ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "then": {
+    "effect": "deny"
+  }
+}
