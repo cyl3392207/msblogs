@@ -1,0 +1,27 @@
+{
+  "if": {
+    "allOf": [
+      {
+        "source": "action",
+        "like": "Microsoft.Cache/Redis/*"
+      },
+      {
+        "not": {
+          "allof": [
+            {
+              "field": "Microsoft.Cache/Redis/sku.name",
+              "in": [ "Basic", "Standard" ]
+            },
+            {
+               "field": "Microsoft.Cache/Redis/enableNonSslPort",
+              "in": [ "Basic", "Standard" ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "then": {
+    "effect": "deny"
+  }
+}
