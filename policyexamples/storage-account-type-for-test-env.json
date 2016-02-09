@@ -11,7 +11,7 @@
       },
       {
         "not": {
-          "allof": [
+          "allOf": [
             {
               "field": "Microsoft.Storage/storageAccounts/accountType",
               "in": [ "Standard_LRS", "Standard_GRS" ]

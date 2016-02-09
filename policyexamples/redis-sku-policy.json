@@ -7,7 +7,7 @@
       },
       {
         "not": {
-          "allof": [
+          "allOf": [
             {
               "field": "Microsoft.Cache/Redis/sku.name",
               "in": [ "Basic", "Standard" ]
