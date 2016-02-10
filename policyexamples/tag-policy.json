@@ -1,0 +1,10 @@
+{
+  "if": {
+    "allOf": [
+      {
+        "source": "action",
+        "contains": "field"
+      }
+    ]
+  },"then": {"effect": "append"}
+}

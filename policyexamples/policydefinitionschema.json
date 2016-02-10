@@ -17,14 +17,13 @@
           "$ref": "#/definitions/operatorAllOf"
         }
       ]
-
-
     },
     "then": {
       "type": "object",
       "properties": {
         "effect": {
-          "type": "string"
+          "type": "string",
+          "enum": ["append","audit","deny"]
         }
       }
     }
