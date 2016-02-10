@@ -1,5 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "This schema defines resource policy definition in Azure, see https://azure.microsoft.com/en-us/documentation/articles/resource-manager-policy/ for more details ",
   "type": "object",
   "properties": {
     "if": {
