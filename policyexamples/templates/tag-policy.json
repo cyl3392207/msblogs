@@ -10,7 +10,8 @@
     },
     {
       "name": "tagValue",
-      "default": "['value1','value2']"
+      "default": "['value1','value2']",
+      "type": "array"
     }
   ],
   "title": "Tag Value Policy",
@@ -26,8 +27,8 @@
                 "containsKey": "[parameters('tagName')]"
               },
               {
-                "field": "tags.",
-                "in": [parameters('tagName')]
+                "field": "tags.[parameters('tagName')]",
+                "in": "[parameters('tagValues')]"
               }
             ]
           }
