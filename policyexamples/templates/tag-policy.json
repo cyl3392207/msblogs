@@ -10,7 +10,7 @@
     },
     {
       "name": "tagValues",
-      "default": "['value1','value2']",
+      "default": "[\"value1\",\"value2\"]",
       "type": "array"
     }
   ],
