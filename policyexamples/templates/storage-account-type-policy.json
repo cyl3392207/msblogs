@@ -1,0 +1,34 @@
+{
+  "parameters": [
+    {
+      "name": "SKUs",
+      "default": "['value1','value2']",
+      "type": "array"
+    }
+  ],
+  "title": "Storage Account Type Policy",
+  "description": "Only selected set of SKUs of storage accounts can be created",
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "source": "action",
+          "like": "Microsoft.Storage/storageAccounts/*"
+        },
+        {
+          "not": {
+            "allof": [
+              {
+                "field": "Microsoft.Storage/storageAccounts/accountType",
+                 "in": "[parameters('SKUs')]"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+  }
+}
