@@ -5,11 +5,11 @@
       "default": "Microsoft.Compute/*"
     },
     {
-      "name": "tagNane",
+      "name": "tagName",
       "default": "department"
     },
     {
-      "name": "tagValue",
+      "name": "tagValues",
       "default": "['value1','value2']",
       "type": "array"
     }
