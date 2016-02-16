@@ -11,7 +11,7 @@
       "type": "string"
     }
   ],
-  "title": "Service Curation Policy",
+  "title": "Per Resource Type Location Policy",
   "description": "Only allow location for a specific type of resource",
   "policyRule": {
     "if": {
