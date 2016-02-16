@@ -1,7 +1,7 @@
 {
   "parameters": [
     {
-      "name": "servicename",
+      "name": "serviceName",
       "default": "Microsoft.SQL/*",
       "type": "string"
     }
@@ -30,7 +30,7 @@
           },
             {
             "source": "action",
-            "like": "[parameters('servicename']"
+            "like": "[parameters('serviceName')]"
           }
         ]
       }
