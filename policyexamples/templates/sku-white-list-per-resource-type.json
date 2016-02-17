@@ -1,0 +1,40 @@
+{
+  "parameters": [
+    {
+      "name": "resourceType",
+      "default": "false",
+      "type": "string"
+    },
+    {
+      "name": "skuList",
+      "default": "[\"sku1\",\"sku2\"]",
+      "type": "array"
+    }
+  ],
+  "title": "SKU Whitelist per Resource Type",
+  "description": "Only Allow certian SKUs for a particular resource Type",
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "source": "action",
+          "like": "[parameters('resourceType')]/*"
+        },
+        {
+          "not": {
+            "allof": [
+              {
+                "field": "[parameters('resourceType')]/sku.name",
+                "in": "[parameters('skuList')]"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+  }
+
+}

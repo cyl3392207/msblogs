@@ -6,8 +6,8 @@
       "type": "string"
     }
   ],
-  "title": "Per Resource Type Location Policy",
-  "description": "Only allow location for a specific type of resource",
+  "title": "Non SSL ports disabled Policy",
+  "description": "Disable non ssl ports in Redis Cache setting",
   "policyRule": {
     "if": {
       "allOf": [
