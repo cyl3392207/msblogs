@@ -3,7 +3,7 @@
     {
       "name": "resourceType",
       "default": "false",
-      "type": "string"
+      "type": "Microsoft.Compute/virtualMachines"
     },
     {
       "name": "skuList",
