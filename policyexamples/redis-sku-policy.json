@@ -2,21 +2,13 @@
   "if": {
     "allOf": [
       {
-        "source": "action",
+        "field": "type",
         "like": "Microsoft.Cache/Redis/*"
       },
       {
         "not": {
-          "allOf": [
-            {
               "field": "Microsoft.Cache/Redis/sku.name",
               "in": [ "Basic", "Standard" ]
-            },
-            {
-               "field": "Microsoft.Cache/Redis/enableNonSslPort",
-              "in": [ "Basic", "Standard" ]
-            }
-          ]
         }
       }
     ]
