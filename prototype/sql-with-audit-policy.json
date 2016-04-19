@@ -1,0 +1,16 @@
+{
+  "if": {
+    "allOf": [
+      {
+        "field": "type",
+        "equals": "Microsoft.SQL/servers/databases/"
+      },
+      {
+        "not": {
+          "field": "Microsoft.SQL/servers/databases/auditPolicies[@.name=default]/auditingState",
+          "equals": "Enabled"
+        }
+      }
+    ]
+  },"then": {"effect": "deny"}
+}

@@ -1,0 +1,44 @@
+{
+  "if": {
+    "anyOf": [
+      {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Resource/deployments"
+          },
+          {
+            "not": {
+              "field": "Microsoft.Resource/deployments/templateLink.uri",
+              "in": [
+                "http://mystorageaccount.blob.core.windows.net/templates/template1.json",
+                "http://mystorageaccount.blob.core.windows.net/templates/template2.json",
+                "http://mystorageaccount.blob.core.windows.net/templates/template3.json"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "allOf": [
+          {
+            "not": {
+              "source": "caller",
+              "equals": "deployments"
+            }
+          },
+          {
+            "not": {
+              "source": "action",
+              "like": "Microsoft.Resource/deployments/*"
+            }
+          }
+        ]
+
+      }
+
+    ]
+
+  },
+  "then": { "effect": "deny" }
+}

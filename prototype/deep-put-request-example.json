@@ -1,0 +1,24 @@
+{
+  "location": "North US",
+  "tags": {
+    "key": "value"
+  },
+  "properties": {
+    "comment": "Resource defined structure"
+
+  },
+  "kind": "resource kind",
+  "resources": [
+    {
+      "type": "nested type, e.g auditPolicies",
+      "name": "name",
+      "location": "westus",
+      "tags": {
+        "key": "value"
+      },
+      "properties": {
+          "comment": "Resource defined structure"
+      }
+    }
+  ]
+}
