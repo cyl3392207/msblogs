@@ -2,8 +2,8 @@
   "if": {
     "allOf": [
       {
-        "source": "action",
-        "like": "Microsoft.Storage/storageAccounts/*"
+        "field": "type",
+        "equals": "Microsoft.Storage/storageAccounts"
       },
       {
         "field": "tags.env",
@@ -11,12 +11,8 @@
       },
       {
         "not": {
-          "allOf": [
-            {
-              "field": "Microsoft.Storage/storageAccounts/accountType",
+              "field": "Microsoft.Storage/storageAccounts/sku.name",
               "in": [ "Standard_LRS", "Standard_GRS" ]
-            }
-          ]
         }
       }
     ]
