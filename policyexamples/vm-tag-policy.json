@@ -16,8 +16,8 @@
         }
       },
       {
-        "source": "action",
-        "like": "Microsoft.Compute/*"
+        "field": "type",
+        "equals": "Microsoft.Compute/virtualMachines"
       }
     ]
   },
