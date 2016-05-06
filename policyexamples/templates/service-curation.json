@@ -1,0 +1,42 @@
+{
+  "parameters": [
+    {
+      "name": "serviceName",
+      "default": "Microsoft.SQL/*",
+      "type": "string"
+    }
+  ],
+  "title": "Service Curation Policy",
+  "description": "Only allow certian services to be accessed",
+  "policyRule": {
+    "if": {
+      "not": {
+        "anyOf": [
+          {
+            "source": "action",
+            "like": "Microsoft.Resources/*"
+          },
+          {
+            "source": "action",
+            "like": "Microsoft.Compute/*"
+          },
+          {
+            "source": "action",
+            "like": "Microsoft.Storage/*"
+          },
+          {
+            "source": "action",
+            "like": "Microsoft.Network/*"
+          },
+            {
+            "source": "action",
+            "like": "[parameters('serviceName')]"
+          }
+        ]
+      }
+    },
+    "then": {
+      "effect": "deny"
+    }
+  }
+}

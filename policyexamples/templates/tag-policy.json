@@ -1,0 +1,46 @@
+{
+  "parameters": [
+    {
+      "name": "resourceType",
+      "default": "Microsoft.Compute/*"
+    },
+    {
+      "name": "tagName",
+      "default": "department"
+    },
+    {
+      "name": "tagValues",
+      "default": "[\"value1\",\"value2\"]",
+      "type": "array"
+    }
+  ],
+  "title": "Tag Value Policy",
+  "description": "Certian tags must be present and value of the tag must be in certain set",
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "not": {
+            "allof": [
+              {
+                "field": "tags",
+                "containsKey": "[parameters('tagName')]"
+              },
+              {
+                "field": "tags.[parameters('tagName')]",
+                "in": "[parameters('tagValues')]"
+              }
+            ]
+          }
+        },
+        {
+          "source": "action",
+          "like": "[parameters('resourceType')]"
+        }
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "parameters": [
+    {
+      "name": "enableNonSslPort",
+      "default": "false",
+      "type": "string"
+    }
+  ],
+  "title": "Non SSL ports disabled Policy",
+  "description": "Disable non ssl ports in Redis Cache setting",
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "source": "action",
+          "like": "Microsoft.Cache/Redis/*"
+        },
+        {
+          "not": {
+            "allof": [
+              {
+                "field": "Microsoft.Cache/Redis/enableNonSslPort",
+                "equals": "[parameters('enableNonSslPort')]"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+  }
+
+}

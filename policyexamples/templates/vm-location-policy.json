@@ -1,0 +1,40 @@
+{
+  "parameters": [
+    {
+      "name": "locations",
+      "default": "[\"westus\",\"eastus\"]",
+      "type": "array"
+    },
+     {
+      "name": "resourceType",
+      "default": "Microsoft.Compute/*",
+      "type": "string"
+    }
+  ],
+  "title": "Per Resource Type Location Policy",
+  "description": "Only allow location for a specific type of resource",
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "not": {
+            "allOf": [
+              {
+                "field": "locations",
+                "in": "[parameters('locations')]"
+              }
+            ]
+          }
+        },
+        {
+          "source": "action",
+          "like": "[parameters('resourceType')]"
+        }
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+  }
+
+}
