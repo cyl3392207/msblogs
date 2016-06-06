@@ -17,8 +17,8 @@
     "if": {
       "allOf": [
         {
-          "source": "action",
-          "like": "[parameters('resourceType')]/*"
+          "field": "type",
+          "equals": "[parameters('resourceType')]"
         },
         {
           "not": {
