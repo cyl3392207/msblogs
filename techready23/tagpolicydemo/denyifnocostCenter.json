@@ -1,0 +1,11 @@
+{
+  "if": {
+    "not": {
+      "field": "tags.costCenter",
+      "equals": "myDepartment"
+    }
+  },
+  "then": {
+    "effect": "deny"
+  }
+}
