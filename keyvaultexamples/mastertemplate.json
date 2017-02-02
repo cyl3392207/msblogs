@@ -1,0 +1,59 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+    },
+    "variables": {
+        "templatelink": "https://raw.githubusercontent.com/cyl3392207/msblogs/master/keyvaultexamples/storestoragekeystokeyvault.json"
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-01-01",
+            "name": "nestedTemplate",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('templatelink')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "tenantId": {
+                        "value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+                    },
+                    "objectId": {
+                        "value": "bf904327-fece-4755-9b3f-71990944483f"
+                    },
+                    "keyVaultName": {
+                        "value": "keyvault"
+                    },
+                    "enabledForTemplateDeployment": {
+                        "value": true
+                    }
+                }
+            },
+            "type": "Microsoft.Resources/deployments"
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "nestedTemplate",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/cyl3392207/msblogs/master/keyvaultexamples/usesecret.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "secret": {
+                        "reference": {
+                            "keyVault": {
+                                "id": "[concat(resourceGroup().id,'/providersMicrosoft.KeyVault/vaults/','keyvault']"
+                            },
+                            "secretName": "[reference(resourceId('Microsoft.Resources/deployments','nestedTempate')).secretName]"
+                        }
+                    }
+                }
+            },
+            "type": "Microsoft.Resources/deployments"
+        }
+    ]
+}
