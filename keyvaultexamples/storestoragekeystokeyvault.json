@@ -128,7 +128,7 @@
     }
   ],
   "variables": {
-    "newStorageName": "[concat('newStorage', uniqueString(resourceGroup().id))]",
+    "newStorageName": "[concat('ns', uniqueString(resourceGroup().id))]",
     "newStorageType": "Standard_LRS",
     "secretName": "newStorageAccountKeys"
   },
