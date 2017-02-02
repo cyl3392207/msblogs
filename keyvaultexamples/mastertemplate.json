@@ -32,7 +32,8 @@
                 }
             },
             "type": "Microsoft.Resources/deployments"
-        },
+        }
+        ,
         {
             "apiVersion": "2015-01-01",
             "name": "nestedTemplate2",
@@ -46,14 +47,24 @@
                     "secret": {
                         "reference": {
                             "keyVault": {
-                                "id": "[concat(resourceGroup().id,'/providersMicrosoft.KeyVault/vaults/','keyvaultdfas')]"
+                                "id": "[concat(resourceGroup().id,'/providers/Microsoft.KeyVault/vaults/','keyvaultdfas')]"
                             },
-                            "secretName": "[reference(resourceId('Microsoft.Resources/deployments','nestedTempate')).secretName]"
+                            "secretName": "[reference(resourceId('Microsoft.Resources/deployments','nestedTemplate')).outputs.secretName.value]"
                         }
                     }
                 }
             },
             "type": "Microsoft.Resources/deployments"
         }
-    ]
+    ],
+    "outputs": {
+        "secretvalue":{
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Resources/deployments','nestedTemplate2')).outputs.secret.value]"
+        },
+        "secretName":{
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Resources/deployments','nestedTemplate')).outputs.secretName.value]"
+        }
+    }
 }
