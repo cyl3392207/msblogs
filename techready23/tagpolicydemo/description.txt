@@ -1,0 +1,4 @@
+You have a resource group for a specific application. The resource group is used by department A. You want to make sure 
+- cost center tag are set on resources for charge back.
+- User can't change the cost center tag afterwards.
+- existing resources are backfilled with the required tags.
