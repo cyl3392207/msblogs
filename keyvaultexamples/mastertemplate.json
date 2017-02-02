@@ -24,7 +24,7 @@
                         "value": "bf904327-fece-4755-9b3f-71990944483f"
                     },
                     "keyVaultName": {
-                        "value": "keyvault"
+                        "value": "keyvaultdfas"
                     },
                     "enabledForTemplateDeployment": {
                         "value": true
@@ -46,7 +46,7 @@
                     "secret": {
                         "reference": {
                             "keyVault": {
-                                "id": "[concat(resourceGroup().id,'/providersMicrosoft.KeyVault/vaults/','keyvault']"
+                                "id": "[concat(resourceGroup().id,'/providersMicrosoft.KeyVault/vaults/','keyvaultdfas')]"
                             },
                             "secretName": "[reference(resourceId('Microsoft.Resources/deployments','nestedTempate')).secretName]"
                         }
