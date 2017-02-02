@@ -35,7 +35,7 @@
         },
         {
             "apiVersion": "2015-01-01",
-            "name": "nestedTemplate",
+            "name": "nestedTemplate2",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
