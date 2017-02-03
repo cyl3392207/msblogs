@@ -63,4 +63,13 @@ New-AzureRmPolicyAssignment -Name "appendcostcenternotags" -PolicyDefinition $ta
 New-AzureRmPolicyAssignment -Name "appendcostcenternoothertag" -PolicyDefinition $tagPolicy[1] -Scope $resourceGroup.Resourceid
 New-AzureRmPolicyAssignment -Name "denycostcentertagupdate" -PolicyDefinition $tagPolicy[2] -Scope $resourceGroup.Resourceid
 
-Find-AzureRmResource -ResourceGroupName group | Where-Object {$_.ResourceType -ne "microsoft.insights/alertrules"}| Set-AzureRmResource -Tags ($a=if($_.Tags -eq $NULL) { @{}} else {$_.Tags}) -Force -UsePatchSemantics
+
+foreach($r in $resources)
+{
+     try{
+         $r | Set-AzureRmResource -Tags ($a=if($_.Tags -eq $NULL) { @{}} else {$_.Tags}) -Force -UsePatchSemantics
+     }
+     catch{
+         Write-Host  $r.ResourceId + "can't be updated"
+     }
+}
