@@ -57,12 +57,14 @@ $tagPolicy+= New-AzureRmPolicyDefinition -Name denyifnocostCenter -DisplayName "
   }
 }'
 
-$resourceGroup = Get-AzureRmResourceGroup -Name "Group" 
+$group = Get-AzureRmResourceGroup -Name "Group" 
 
-New-AzureRmPolicyAssignment -Name "appendcostcenternotags" -PolicyDefinition $tagPolicy[0] -Scope $resourceGroup.Resourceid
-New-AzureRmPolicyAssignment -Name "appendcostcenternoothertag" -PolicyDefinition $tagPolicy[1] -Scope $resourceGroup.Resourceid
-New-AzureRmPolicyAssignment -Name "denycostcentertagupdate" -PolicyDefinition $tagPolicy[2] -Scope $resourceGroup.Resourceid
+New-AzureRmPolicyAssignment -Name "appendcostcenternotags" -PolicyDefinition $tagPolicy[0] -Scope $group.Resourceid
+New-AzureRmPolicyAssignment -Name "appendcostcenternoothertag" -PolicyDefinition $tagPolicy[1] -Scope $group.Resourceid
+New-AzureRmPolicyAssignment -Name "denycostcentertagupdate" -PolicyDefinition $tagPolicy[2] -Scope $group.Resourceid
 
+
+$resources = Find-AzureRmResource -ResourceGroupName $group.ResourceGroupName 
 
 foreach($r in $resources)
 {
@@ -73,3 +75,6 @@ foreach($r in $resources)
          Write-Host  $r.ResourceId + "can't be updated"
      }
 }
+
+
+Find-AzureRmResource -ResourceGroupName $group.ResourceGroupName  | Where-Object {$_.ResourceType -ne "microsoft.insights/alertrules"}| Set-AzureRmResource -Tags ($a=if($_.Tags -eq $NULL) { @{}} else {$_.Tags}) -Force -UsePatchSemantics
