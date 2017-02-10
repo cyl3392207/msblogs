@@ -1,5 +1,9 @@
 Login-AzureRmAccount
 
+$group = Get-AzureRmResourceGroup -Name "Group" 
+
+$resources = Find-AzureRmResource -ResourceGroupName $group.ResourceGroupName 
+
 
 $tagPolicy = @()
 $tagPolicy+=New-AzureRmPolicyDefinition -Name appendcostCenternotag -DisplayName "Append Cost Center Tag (no tag)" -Policy '{
@@ -57,15 +61,20 @@ $tagPolicy+= New-AzureRmPolicyDefinition -Name denyifnocostCenter -DisplayName "
   }
 }'
 
-$group = Get-AzureRmResourceGroup -Name "Group" 
 
 New-AzureRmPolicyAssignment -Name "appendcostcenternotags" -PolicyDefinition $tagPolicy[0] -Scope $group.Resourceid
 New-AzureRmPolicyAssignment -Name "appendcostcenternoothertag" -PolicyDefinition $tagPolicy[1] -Scope $group.Resourceid
 New-AzureRmPolicyAssignment -Name "denycostcentertagupdate" -PolicyDefinition $tagPolicy[2] -Scope $group.Resourceid
 
 
-$resources = Find-AzureRmResource -ResourceGroupName $group.ResourceGroupName 
+# relogin to refresh the token, so that policy cache are refreshed. There is a up to 30 minutes delay since policy cache will be refrehsed every 30 minutes. Relogin can refrehh the cache
+Login-AzureRmAccount
 
+# Verify cost center tags are appended, even the request doesn't contains cost center tag
+New-AzureRmStorageAccount -ResourceGroupName $group.ResourceGroupName -Name ("tsaccc" + (Get-Random -Minimum 1 -Maximum 1000)) -SkuName Standard_LRS -Location westus -Kind Storage
+
+
+# applying a patch for existing resources  
 foreach($r in $resources)
 {
      try{
@@ -76,5 +85,20 @@ foreach($r in $resources)
      }
 }
 
+# clean up after the demo
 
-Find-AzureRmResource -ResourceGroupName $group.ResourceGroupName  | Where-Object {$_.ResourceType -ne "microsoft.insights/alertrules"}| Set-AzureRmResource -Tags ($a=if($_.Tags -eq $NULL) { @{}} else {$_.Tags}) -Force -UsePatchSemantics
+Get-AzureRMPolicyAssignment -Scope $Group.ResourceId | Remove-AzureRmPolicyAssignment -Scope $group.ResourceId
+
+# relogin to refresh the token, so that policy cache are refreshed.
+Login-AzureRmAccount
+
+
+foreach($r in $resources)
+{
+     try{
+         $r | Set-AzureRmResource -Tag @{} -Force 
+     }
+     catch{
+         Write-Host  $r.ResourceId + "can't be updated"
+     }
+}
