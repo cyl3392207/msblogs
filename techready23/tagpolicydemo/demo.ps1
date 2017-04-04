@@ -33,8 +33,5 @@ $tagPolicy = New-AzureRmPolicyDefinition -Name appendtagpolicyv2 -DisplayName "A
 }'
 
 New-AzureRmPolicyAssignment -Name "appendcostcenter" -PolicyDefinition $tagPolicy -Scope $group.Resourceid -tagName "tags.costCenter" -tagValue "00001"
-
-$yourowntag = @{ Environment="Test" } 
-
-New-AzureRMStorageAccount -Name "fdsacdsa322fdasfdsa3cdxf" -ResourceGroupName $group.ResourceGroupName -SkuName Standard_LRS -Location westus -Tag $yourowntag
-
+New-AzureRmPolicyAssignment -Name "appendBONumber" -PolicyDefinition $tagPolicy -Scope $group.Resourceid -tagName "tags.BONumber" -tagValue "00002"
+New-AzureRMStorageAccount -Name "fdsaffcdsv322dsdscdxf" -ResourceGroupName $group.ResourceGroupName -SkuName Standard_LRS -Location westus
